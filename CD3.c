@@ -1,29 +1,26 @@
 #include <stdio.h>
+#include <string.h>
+
+void identify(char *s) {
+    char *rel[] = {"<", ">", "<=", ">=", "==", "!="};
+    char *arith[] = {"+", "-", "*", "/", "%"};
+    char *logical[] = {"&&", "||", "!"};
+    char *bitwise[] = {"&", "|", "^", "~", "<<", ">>"};
+    char *assign[] = {"=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="};
+    
+    for (int i = 0; i < 6; i++) if (!strcmp(s, rel[i])) { printf("It is a Relational Operator\n"); return; }
+    for (int i = 0; i < 5; i++) if (!strcmp(s, arith[i])) { printf("It is an Arithmetic Operator\n"); return; }
+    for (int i = 0; i < 3; i++) if (!strcmp(s, logical[i])) { printf("It is a Logical Operator\n"); return; }
+    for (int i = 0; i < 6; i++) if (!strcmp(s, bitwise[i])) { printf("It is a Bitwise Operator\n"); return; }
+    for (int i = 0; i < 11; i++) if (!strcmp(s, assign[i])) { printf("It is an Assignment Operator\n"); return; }
+    
+    printf("Invalid Operator\n");
+}
 
 int main() {
-    char s[3];
-    printf("Enter any operator: ");
-    scanf("%s", s);
-
-    const char *ops[] = {"Greater than", "Less than", "Assignment", "Bit Not", "Bitwise AND", "Bitwise OR", 
-                         "Addition", "Subtraction", "Multiplication", "Division", "Modulus"};
-    const char *logical_ops[] = {"Greater than or equal", "Less than or equal", "Equal to", "Not Equal", 
-                                 "Logical AND", "Logical OR"};
-
-    switch(s[0]) {
-        case '>': printf("%s\n", s[1] == '=' ? logical_ops[0] : ops[0]); break;
-        case '<': printf("%s\n", s[1] == '=' ? logical_ops[1] : ops[1]); break;
-        case '=': printf("%s\n", s[1] == '=' ? logical_ops[2] : ops[2]); break;
-        case '!': printf("%s\n", s[1] == '=' ? logical_ops[3] : ops[3]); break;
-        case '&': printf("%s\n", s[1] == '&' ? logical_ops[4] : ops[4]); break;
-        case '|': printf("%s\n", s[1] == '|' ? logical_ops[5] : ops[5]); break;
-        case '+': printf("%s\n", ops[6]); break;
-        case '-': printf("%s\n", ops[7]); break;
-        case '*': printf("%s\n", ops[8]); break;
-        case '/': printf("%s\n", ops[9]); break;
-        case '%': printf("%s\n", ops[10]); break;
-        default: printf("Not an operator\n");
-    }
-
+    char op[10];
+    printf("Enter value to be identified: ");
+    scanf("%s", op);
+    identify(op);
     return 0;
 }
