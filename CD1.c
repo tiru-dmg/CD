@@ -2,34 +2,36 @@
 #include <ctype.h>
 #include <string.h>
 
-int isKeyword(char buffer[]) {
-    char keywords[32][10] = {"auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"};
-    for (int i = 0; i < 32; i++) {
-        if (strcmp(keywords[i], buffer) == 0) return 1;
-    }
+char *keywords[] = {"int", "char", "float", "double", "return", "if", "else", "while", "for", "do"};
+char *operators = "=+-*/%";
+
+int isKeyword(char *word) {
+    for (int i = 0; i < 10; i++)
+        if (strcmp(word, keywords[i]) == 0)
+            return 1;
     return 0;
 }
 
+int isValidIdentifier(char *word) {
+    if (!isalpha(word[0]) && word[0] != '_') return 0;
+    for (int i = 1; word[i]; i++)
+        if (!isalnum(word[i]) && word[i] != '_') return 0;
+    return 1;
+}
+
 int main() {
-    char ch, buffer[15], operators[] = "+-*/%=";
-    int i, j = 0;
-
-    // Simulated input file content
-    const char *input = "int main() {\n    int a = 10;\n    int b = 20;\n    int sum = a + b;\n    return 0;\n}";
-
-    // Simulate reading from a file by iterating over the input string
-    for (int k = 0; (ch = input[k]) != '\0'; k++) {
-        for (i = 0; i < 6; i++) {
-            if (ch == operators[i]) printf("%c is operator\n", ch);
-        }
-        if (isalnum(ch)) buffer[j++] = ch;
-        else if ((ch == ' ' || ch == '\n') && (j != 0)) {
-            buffer[j] = '\0';
-            j = 0;
-            if (isKeyword(buffer)) printf("%s is keyword\n", buffer);
-            else printf("%s is identifier\n", buffer);
-        }
+    char input[][10] = {"int", "a", "=", "b", "+", "1c"};
+    int n = sizeof(input) / sizeof(input[0]);
+    
+    for (int i = 0; i < n; i++) {
+        if (isKeyword(input[i]))
+            printf("'%s' IS A KEYWORD\n", input[i]);
+        else if (strchr(operators, input[i][0]) && strlen(input[i]) == 1)
+            printf("'%s' IS AN OPERATOR\n", input[i]);
+        else if (isValidIdentifier(input[i]))
+            printf("'%s' IS A VALID IDENTIFIER\n", input[i]);
+        else
+            printf("'%s' IS NOT A VALID IDENTIFIER\n", input[i]);
     }
-
     return 0;
 }
