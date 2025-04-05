@@ -1,4 +1,4 @@
-//5.Write a C program for eliminating the left recursion and left factoring of a given grammar
+//7.Write a C program for eliminating the left recursion and left factoring of a given grammar
 
 
 
