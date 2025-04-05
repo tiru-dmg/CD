@@ -1,3 +1,6 @@
+//9. write a C program for implementation of LR parsing algorithm to accept a given input string.
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
