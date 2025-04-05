@@ -1,3 +1,5 @@
+//3.write a c program to simulate lexical analyzer to validate a given input string
+
 #include <stdio.h>
 #include <string.h>
 
